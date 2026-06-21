@@ -34,13 +34,17 @@ Each `.cake-button` SHALL be positioned via CSS using viewport-relative units to
 
 ### Requirement: Button hover triggers glow visibility
 
-Hovering over each `.cake-button` SHALL add class `.visible` to the corresponding `#glow-N` element. Leaving SHALL remove the class.
+Hover SHALL trigger visibility on both the glow element AND the overlay text element simultaneously.
 
-#### Scenario: Hover activates glow
+Hovering over each `.cake-button` SHALL add class `.visible` to both the corresponding `#glow-N` element AND the corresponding `#text-N-over` element. Leaving SHALL remove the class from both.
+
+#### Scenario: Hover activates glow and text overlay
 - **WHEN** mouse enters `#button-3`
 - **THEN** `#glow-3` SHALL receive class `visible`
+- **AND** `#text-3-over` SHALL receive class `visible`
 
-#### Scenario: Mouse leave deactivates glow
+#### Scenario: Mouse leave deactivates glow and text overlay
 - **WHEN** mouse leaves `#button-3`
 - **THEN** `#glow-3` SHALL have class `visible` removed
+- **AND** `#text-3-over` SHALL have class `visible` removed
 

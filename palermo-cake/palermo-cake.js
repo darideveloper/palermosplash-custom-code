@@ -1,59 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Select your target element
     const targetElement = document.querySelector('body'); 
-    
     if (!targetElement) return;
 
+    // 1. Handle Orientation
     function updateOrientation() {
-        // Option A: Based on the browser viewport size
         const width = window.innerWidth;
         const height = window.innerHeight;
+        const isHorizontal = width >= height;
 
-        // Option B: Un-comment below if you want it based on a specific parent container's size instead
-        // const width = targetElement.parentElement.clientWidth;
-        // const height = targetElement.parentElement.clientHeight;
-
-        if (width >= height) {
-            targetElement.classList.add('horizontal');
-            targetElement.classList.remove('vertical');
-        } else {
-            targetElement.classList.add('vertical');
-            targetElement.classList.remove('horizontal');
-        }
+        targetElement.classList.toggle('horizontal', isHorizontal);
+        targetElement.classList.toggle('vertical', !isHorizontal);
     }
 
-    // 2. Run on initial page load
     updateOrientation();
-
-    // 3. Run whenever the screen resizes
     window.addEventListener('resize', updateOrientation);
+
+    // 2. Duplicate "text" elements
+    document.querySelectorAll('.text').forEach(textEl => {
+        const clone = textEl.cloneNode(true);
+        if (textEl.id) {
+            clone.id = `${textEl.id}-over`;
+        }
+        clone.classList.add('over');
+        textEl.parentNode.insertBefore(clone, textEl.nextSibling);
+    });
 	
-	// Loop 5 times to generate button-1 through button-5
+	// 3. Generate Buttons & Handle Hovers
 	for (let i = 1; i <= 5; i++) {
-		// 1. Create the div element
 		const div = document.createElement('div');
-
-		// 2. Assign the ID (e.g., button-1, button-2)
 		div.id = `button-${i}`;
-		div.classList.add("cake-button")
+		div.classList.add("cake-button");
 
-		// 3. Find the corresponding glow element (#glow-1, #glow-2, etc.)
 		const glowElement = document.querySelector(`#glow-${i}`);
+        const overTextElement = document.querySelector(`#text-${i}-over`);
 
-		// 4. Add hover detection (mouseenter / mouseleave)
-		div.addEventListener('mouseenter', () => {
-			if (glowElement) {
-				glowElement.classList.add('visible');
-			}
-		});
+        // Reusable toggle function for hover states
+        const toggleVisibility = (e) => {
+            const isVisible = e.type === 'mouseenter';
+            [glowElement, overTextElement].forEach(el => {
+                if (el) el.classList.toggle('visible', isVisible);
+            });
+        };
 
-		div.addEventListener('mouseleave', () => {
-			if (glowElement) {
-				glowElement.classList.remove('visible');
-			}
-		});
+		div.addEventListener('mouseenter', toggleVisibility);
+		div.addEventListener('mouseleave', toggleVisibility);
 
-		// 5. Append the newly created div to the body (or any container)
 		document.body.appendChild(div);
 	}
 });

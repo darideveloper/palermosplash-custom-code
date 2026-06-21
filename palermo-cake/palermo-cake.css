@@ -31,7 +31,6 @@ body {
 
 #cake-parts .glow.visible img {
 	opacity: 1;
-	animation: zoomer 2s linear infinite;
 }
 
 .cake-button {
@@ -90,111 +89,20 @@ body {
 }
 
 
-#cake-parts .texts {
-	mix-blend-mode: darken;
+#cake-parts .text {
+	mix-blend-mode: color-burn;
 	z-index: 2;
+	opacity: 0.8;
 }
 
-
-/* main cake */
-/*#main-cake img {
-    object-fit: contain;
-	position: fixed;
-	left: 50%;
-	transform: translate(-50%, -100%);
-	bottom: -85vh;
-}
-
-.vertical #main-cake img {
-	width: 90vw;
-	height: auto;
-}
-
-.horizontal #main-cake img {
-	height: 90vh;
-	width: auto;
-}*/
-
-/* fglow layers */
-/*#glow-effects {
-	position: fixed;
-	top: 0;
-	left: 0;
-}
-
-#glow-effects img {
+#cake-parts .text.over {
+	mix-blend-mode: darken;
+	z-index: 4;
 	opacity: 0;
-	position: fixed;
-}*/
-
-/* glow layer 1*/
-/*#glow-effects img[src$="glow-effect-layer1.webp"] {
-	opacity: 0;
-    object-fit: contain;
-    position: fixed;
-    left: 50%;
-    transform: translatex(-49.5%);
+	transition: all 1s ease-in-out;
+	pointer-events: none;
 }
 
-.vertical #glow-effects img[src$="glow-effect-layer1.webp"] {
-	width: 116vw;
-	height: auto;
-    bottom: 30px;
-    max-width: none;
-}
-
-.horizontal #glow-effects img[src$="glow-effect-layer1.webp"] {
-	height: 69vh;
-    width: auto;
-    bottom: 30px;
-}*/
-
-/* glow layer 2*/
-/*#glow-effects img[src$="glow-effect-layer2.webp"] {
+#cake-parts .text.over.visible {
 	opacity: 1;
-    object-fit: contain;
-	position: fixed;	
-	left: 50%;
-	transform: translatex(-52%);
 }
-
-.vertical #glow-effects img[src$="glow-effect-layer2.webp"] {
-	width: 100vw;
-    height: auto;
-    bottom: 45px;
-    max-width: none;
-    transform: translatex(-50%);
-}
-
-.horizontal #glow-effects img[src$="glow-effect-layer2.webp"] {
-	height: 61vh;
-    width: auto;
-    bottom: 45px;
-    margin-left: 0.9vw;
-}*/
-
-/* glow layer 3*/
-/*#glow-effects img[src$="glow-effect-layer3.webp"] {
-	opacity: 0;
-    object-fit: contain;
-	position: fixed;	
-	left: 50%;
-	transform: translatex(-52%);
-}
-
-.vertical #glow-effects img[src$="glow-effect-layer3.webp"] {
-    width: 93vw;
-    height: auto;
-    bottom: 60vh;
-    max-width: none;
-    transform: translatex(-47%);
-}
-
-.horizontal #glow-effects img[src$="glow-effect-layer3.webp"] {
-	height: 61vh;
-    width: auto;
-    bottom: calc(15vh * 2);
-    margin-left: 0.9vw;
-}*/
-
-
