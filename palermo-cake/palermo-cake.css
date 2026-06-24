@@ -1,3 +1,4 @@
+/* main cake layout */
 body {
 	width: 100vw;
     height: 100vh;
@@ -105,4 +106,15 @@ body {
 
 #cake-parts .text.over.visible {
 	opacity: 1;
+}
+
+/* brand logo */
+#logo img {
+	width: 200px;
+	height: auto;
+	position: fixed;
+	top: 15px;
+	right: 15px;
+	z-index: -1;
+    mix-blend-mode: overlay;
 }
