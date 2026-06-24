@@ -1,0 +1,35 @@
+.palermo-loader {
+	position: fixed;
+	inset: 0;
+	z-index: 100000;
+	background: #fff;
+	display: grid;
+	place-items: center;
+	color: #000;
+	transition: opacity 0.4s;
+}
+
+.palermo-ready .palermo-loader {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.palermo-loader__icon {
+	width: 120px;
+	height: 144px;
+	fill: currentColor;
+	transform-origin: 50% 90%;
+	animation: palermo-wobble 1.6s ease-in-out infinite;
+}
+
+@keyframes palermo-wobble {
+	0%,
+	100% { transform: rotate(-8deg); }
+	50%      { transform: rotate( 8deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.palermo-loader__icon {
+		animation: none;
+	}
+}

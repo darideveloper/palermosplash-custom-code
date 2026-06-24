@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Palermo Loader Snippet</title>
+<style>
+	body { margin: 0; font-family: system-ui, -apple-system, sans-serif; color: #333; }
+	.palermo-preview-note { padding: 24px 32px; background: #fafafa; border-bottom: 1px solid #eee; }
+	.palermo-preview-note p { margin: 0 0 6px; }
+	.palermo-preview-note code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+	.palermo-loader { position: fixed; inset: 0; z-index: 100000; background: #fff; display: grid; place-items: center; color: #000; }
+	.palermo-loader__icon { width: 120px; height: 144px; fill: currentColor; transform-origin: 50% 90%; animation: palermo-wobble 1.6s ease-in-out infinite; }
+	@keyframes palermo-wobble { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+	@media (prefers-reduced-motion: reduce) { .palermo-loader__icon { animation: none; } }
+</style>
+</head>
+<body>
+<!--
+	Copy the <div class="palermo-loader">…</div> block below into an Elementor
+	HTML widget placed at the very top of the landing page.
+
+	This file is a preview + reference only. It is NOT served by WordPress.
+	Removing the Elementor HTML widget from the page breaks the loader.
+-->
+<div class="palermo-preview-note">
+	<p><strong>Loader preview</strong> (won&rsquo;t fade &mdash; this is a static reference page).</p>
+	<p>Copy this block into the Elementor HTML widget:</p>
+	<p><code>&lt;div class=&quot;palermo-loader&quot; role=&quot;status&quot; aria-label=&quot;Loading&quot;&gt;...&lt;/div&gt;</code></p>
+</div>
+
+<div class="palermo-loader" role="status" aria-label="Loading">
+	<svg class="palermo-loader__icon" viewBox="0 0 200 240" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+		<path d="M100 30 Q88 52 100 60 Q112 52 100 30 Z" />
+		<rect x="95" y="60" width="10" height="22" />
+		<rect x="70" y="82" width="60" height="38" />
+		<rect x="55" y="120" width="90" height="38" />
+		<rect x="40" y="158" width="120" height="38" />
+		<rect x="28" y="196" width="144" height="14" />
+	</svg>
+</div>
+</body>
+</html>
