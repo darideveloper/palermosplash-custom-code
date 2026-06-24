@@ -1,6 +1,6 @@
 const PALERMO_CAKE_DATA = [
   {
-    id: 5,
+    id: 1,
     icon: "🎂",
     shortName: "Custom Cakes",
     fullName: "Custom Cakes",
@@ -36,7 +36,7 @@ const PALERMO_CAKE_DATA = [
     url: "https://ccdev2026.wpenginepowered.com/wholesale",
   },
   {
-    id: 1,
+    id: 5,
     icon: "☕",
     shortName: "Cafe",
     fullName: "The Café",
