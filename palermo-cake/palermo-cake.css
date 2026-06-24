@@ -55,6 +55,7 @@ body {
 	cursor: pointer;
 	transition: transform 200ms ease;
 	mix-blend-mode: color-burn;
+	font-size: 2.5vh;
 }
 
 .horizontal .cake-button#button-1 {
@@ -107,7 +108,6 @@ body {
 }
 
 .palermo-btn-icon {
-	font-size: 1.75em;
 	line-height: 1;
 	transition: transform 200ms ease;
 	transform-origin: center;
@@ -115,7 +115,6 @@ body {
 
 .palermo-btn-label {
 	font-family: 'Dancing Script', cursive;
-	font-size: 1.4em;
 	line-height: 1.15;
 	font-weight: 700;
 	color: #2b1d0e;
@@ -236,13 +235,14 @@ body {
 
 /* brand logo */
 #logo img {
-	width: 200px;
+	width: 250px;
 	height: auto;
 	position: fixed;
 	top: 15px;
 	right: 15px;
 	z-index: -1;
     mix-blend-mode: overlay;
+	min-width: 25vw;
 }
 
 @media (max-width: 480px) {
@@ -250,4 +250,5 @@ body {
 		font-size: 1.4em;
 	}
 }
+
 
