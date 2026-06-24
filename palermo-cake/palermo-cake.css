@@ -2,7 +2,8 @@
 body {
 	width: 100vw;
     height: 100vh;
-	position: relative
+	position: relative;
+	overflow: hidden;
 }
 
 #cake-parts img {
@@ -55,7 +56,7 @@ body {
 }
 
 .horizontal .cake-button#button-1 {
-	bottom: 24vh;
+	bottom: 23vh;
 }
 
 .horizontal .cake-button#button-2 {
@@ -71,7 +72,7 @@ body {
 }
 
 .horizontal .cake-button#button-5 {
-	bottom: 70vh;
+	bottom: 70.5vh;
 }
 
 .vertical .cake-button {
@@ -84,7 +85,7 @@ body {
 }
 
 .vertical .cake-button#button-2 {
-	bottom: 19vh;
+	bottom: 19.5vh;
 }
 
 .vertical .cake-button#button-3 {
@@ -214,3 +215,4 @@ body {
 	z-index: -1;
     mix-blend-mode: overlay;
 }
+
