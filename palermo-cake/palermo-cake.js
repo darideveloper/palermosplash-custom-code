@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.id = `button-${i}`;
         button.classList.add('cake-button');
 
-        const data = hasData ? PALERMO_CAKE_DATA[i - 1] : null;
+        const data = hasData ? PALERMO_CAKE_DATA.find(d => d.id === i) : null;
         const glowElement = document.getElementById(`glow-${i}`);
 
         if (data) {
@@ -52,10 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (activeLayerId !== null) {
                 isTransitioning = true;
-                const prevBtn = document.getElementById(`button-${activeLayerId}`);
-                if (prevBtn) prevBtn.classList.remove('is-active');
-                closePopup();
-                activeLayerId = null;
+                dismissPopup();
 
                 setTimeout(() => {
                     openPopup(i);
@@ -83,18 +80,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         if (!popup || !activeLayerId) return;
         if (e.target.closest('.palermo-popup, .cake-button')) return;
-        closePopup();
-        const btn = document.getElementById(`button-${activeLayerId}`);
-        if (btn) btn.classList.remove('is-active');
-        activeLayerId = null;
+        dismissPopup();
     });
 
     function openPopup(layerId) {
         if (!popup) return;
-        const data = PALERMO_CAKE_DATA[layerId - 1];
+        const data = PALERMO_CAKE_DATA.find(d => d.id === layerId);
         if (!data) return;
 
         popup.innerHTML = '';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'palermo-popup-close';
+        closeBtn.type = 'button';
+        closeBtn.setAttribute('aria-label', 'Close');
+        closeBtn.textContent = '\u00d7';
+        closeBtn.addEventListener('click', () => dismissPopup());
+        popup.appendChild(closeBtn);
 
         const icon = document.createElement('div');
         icon.className = 'palermo-popup-icon';
@@ -140,7 +142,11 @@ document.addEventListener('DOMContentLoaded', () => {
         popup.classList.add('open');
     }
 
-    function closePopup() {
-        if (popup) popup.classList.remove('open');
+    function dismissPopup() {
+        if (!popup || activeLayerId === null) return;
+        popup.classList.remove('open');
+        const btn = document.getElementById('button-' + activeLayerId);
+        if (btn) btn.classList.remove('is-active');
+        activeLayerId = null;
     }
 });
