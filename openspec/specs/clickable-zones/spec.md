@@ -12,26 +12,6 @@ The system SHALL generate 5 `div` elements with class `cake-button` and IDs `but
 - **THEN** 5 `div.cake-button` elements SHALL exist in the DOM
 - **AND** their IDs SHALL be `button-1`, `button-2`, `button-3`, `button-4`, `button-5`
 
-### Requirement: Each button aligns to a cake layer
-
-Each `.cake-button` SHALL be positioned via CSS using viewport-relative units to overlay a specific section of the cake image. Positioning SHALL differ between `.horizontal` and `.vertical` orientations.
-
-#### Scenario: Horizontal button positions
-- **WHEN** `<body>` has class `horizontal`
-- **THEN** `#button-1` SHALL be at `bottom: 24vh`
-- **AND** `#button-2` at `bottom: 35vh`
-- **AND** `#button-3` at `bottom: 46vh`
-- **AND** `#button-4` at `bottom: 58vh`
-- **AND** `#button-5` at `bottom: 70vh`
-
-#### Scenario: Vertical button positions
-- **WHEN** `<body>` has class `vertical`
-- **THEN** `#button-1` SHALL be at `bottom: 9vh`
-- **AND** `#button-2` at `bottom: 19vh`
-- **AND** `#button-3` at `bottom: 30vh`
-- **AND** `#button-4` at `bottom: 41vh`
-- **AND** `#button-5` at `bottom: 52vh`
-
 ### Requirement: Button hover triggers glow visibility
 
 Hovering over each `.cake-button` SHALL add class `.visible` to the corresponding `#glow-N` element. Leaving SHALL remove the class. Hovering SHALL NOT toggle any text-overlay element (the text-hover-overlay system is removed).
@@ -113,23 +93,23 @@ The 5 layer button elements (`#button-1` through `#button-5`) SHALL be created o
 - **THEN** no `#button-N` elements SHALL be created
 - **AND** the page SHALL NOT have any `.cake-button` elements
 
-### Requirement: Existing positioning rules are unchanged
+### Requirement: Button positioning tracks the cake image
 
-The per-orientation positioning of each `.cake-button` (the existing rules for `.horizontal` and `.vertical`) SHALL remain in effect and SHALL NOT be modified by this change.
+The `.cake-button` elements SHALL be positioned to track the cake image's rendered bounding rect, expressed as a percentage of the cake's height and a horizontal-center anchor on the cake. The per-orientation positioning SHALL be implemented in `palermo-cake.js` (via the `cake-button-tracking` capability) and SHALL produce a layer-aligned layout on every real device, regardless of system bars, URL bar collapse, or orientation. The computed `top` SHALL be offset by `± buttonHeight / 2` so the button's center lands on the layer Y; the sign is `+` in vertical mode and `-` in horizontal mode. The existing per-orientation `bottom: <vh>` rules in `palermo-cake.css` SHALL remain in effect as a fallback for the brief moment between `DOMContentLoaded` and the first `positionButtons()` run; they SHALL NOT be the authoritative positioning contract for the buttons.
 
-#### Scenario: Horizontal button positions
-- **WHEN** `<body>` has class `horizontal`
-- **THEN** `#button-1` SHALL be at `bottom: 24vh`
-- **AND** `#button-2` at `bottom: 35vh`
-- **AND** `#button-3` at `bottom: 46vh`
-- **AND** `#button-4` at `bottom: 58vh`
-- **AND** `#button-5` at `bottom: 70vh`
+#### Scenario: Initial position after page load
+- **WHEN** the page loads on a real device in any orientation
+- **THEN** each `.cake-button` SHALL be visually centered on a specific layer of the cake illustration
+- **AND** the alignment SHALL NOT depend on the device's system bars or URL bar state
+- **AND** the alignment SHALL be equivalent to the alignment seen in Chrome DevTools' responsive simulator for the same logical dimensions
 
-#### Scenario: Vertical button positions
-- **WHEN** `<body>` has class `vertical`
-- **THEN** `#button-1` SHALL be at `bottom: 9vh`
-- **AND** `#button-2` at `bottom: 19vh`
-- **AND** `#button-3` at `bottom: 30vh`
-- **AND** `#button-4` at `bottom: 41vh`
-- **AND** `#button-5` at `bottom: 52vh`
+#### Scenario: DevTools responsive simulator visual parity
+- **WHEN** the page is viewed in Chrome DevTools' responsive simulator at a given device profile
+- **THEN** the buttons SHALL align with the cake layers in the same way they did before this change
+- **AND** the inline `top` set by `positionButtons()` SHALL be the active positioning for the buttons
+
+#### Scenario: Orientation switch
+- **WHEN** the viewport orientation changes
+- **THEN** the buttons SHALL be repositioned using the orientation-specific percentage table
+- **AND** the buttons SHALL remain aligned with their target cake layers after the switch
 

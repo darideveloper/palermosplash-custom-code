@@ -6,13 +6,69 @@ document.addEventListener('DOMContentLoaded', () => {
     const hasData = typeof PALERMO_CAKE_DATA !== 'undefined';
     const targetElement = document.body;
 
+    const LAYER_PERCENTAGES = {
+        vertical:   { 1: 0.93,  2: 0.78,  3: 0.61,  4: 0.44,  5: 0.27  },
+        horizontal: { 1: 0.93,  2: 0.78,  3: 0.61,  4: 0.44,  5: 0.27  }
+    };
+
+    function getCakeImage() {
+        const mainCakeWidget = document.getElementById('main-cake');
+        if (mainCakeWidget) {
+            const img = mainCakeWidget.querySelector('img');
+            if (img) return img;
+        }
+        const container = document.getElementById('cake-parts');
+        if (!container) return null;
+        const imgs = container.querySelectorAll('img');
+        for (const img of imgs) {
+            if (!img.closest('[id^="glow-"]') && !img.closest('.glow')) return img;
+        }
+        return null;
+    }
+
+    function positionButtons() {
+        const cake = getCakeImage();
+        if (!cake) return;
+        const rect = cake.getBoundingClientRect();
+        if (rect.height === 0) return;
+        const isHorizontal = targetElement.classList.contains('horizontal');
+        const table = isHorizontal ? LAYER_PERCENTAGES.horizontal : LAYER_PERCENTAGES.vertical;
+        for (let i = 1; i <= 5; i++) {
+            const btn = document.getElementById(`button-${i}`);
+            if (!btn) continue;
+            const btnRect = btn.getBoundingClientRect();
+            const layerY = rect.top + rect.height * table[i];
+            const isVertical = !isHorizontal;
+            const topValue = isVertical ? layerY + btnRect.height / 2 : layerY - btnRect.height / 2;
+            btn.style.top = `${topValue}px`;
+            btn.style.left = `${rect.left + rect.width / 2}px`;
+            btn.style.bottom = 'auto';
+        }
+    }
+
     function updateOrientation() {
         const isHorizontal = window.innerWidth >= window.innerHeight;
         targetElement.classList.toggle('horizontal', isHorizontal);
         targetElement.classList.toggle('vertical', !isHorizontal);
+        positionButtons();
     }
     updateOrientation();
-    window.addEventListener('resize', updateOrientation);
+
+    let resizeRafId = null;
+    window.addEventListener('resize', () => {
+        if (resizeRafId !== null) return;
+        resizeRafId = requestAnimationFrame(() => {
+            resizeRafId = null;
+            updateOrientation();
+        });
+    });
+
+    window.addEventListener('load', positionButtons);
+
+    const cakeImage = getCakeImage();
+    if (cakeImage && typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(positionButtons).observe(cakeImage);
+    }
 
     let activeLayerId = null;
     let isTransitioning = false;
@@ -69,6 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.body.appendChild(button);
     }
+
+    positionButtons();
 
     let popup = null;
     if (hasData) {
