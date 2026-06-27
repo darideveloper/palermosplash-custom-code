@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const targetElement = document.body;
 
     const LAYER_PERCENTAGES = {
-        vertical:   { 1: 0.93,  2: 0.78,  3: 0.61,  4: 0.44,  5: 0.27  },
-        horizontal: { 1: 0.93,  2: 0.78,  3: 0.61,  4: 0.44,  5: 0.27  }
+        vertical:   { 1: 0.71,  2: 0.60,  3: 0.49,  4: 0.37,  5: 0.24  },
+        horizontal: { 1: 0.71,  2: 0.60,  3: 0.49,  4: 0.37,  5: 0.24  }
     };
 
     function getCakeImage() {
