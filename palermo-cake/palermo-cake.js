@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hasData = typeof PALERMO_CAKE_DATA !== 'undefined';
     const targetElement = document.body;
 
+    // keep in sync with openspec/specs/cake-button-tracking/spec.md
     const LAYER_PERCENTAGES = {
         vertical:   { 1: 0.71,  2: 0.60,  3: 0.49,  4: 0.37,  5: 0.24  },
         horizontal: { 1: 0.71,  2: 0.60,  3: 0.49,  4: 0.37,  5: 0.24  }
