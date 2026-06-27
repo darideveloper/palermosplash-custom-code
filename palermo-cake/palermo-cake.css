@@ -235,6 +235,9 @@ body {
 }
 
 /* brand logo */
+#logo { display: none; }
+
+/*
 #logo img {
 	width: 250px;
 	height: auto;
@@ -245,6 +248,7 @@ body {
     mix-blend-mode: overlay;
 	min-width: 25vw;
 }
+*/
 
 @media (max-width: 480px) {
 	.palermo-popup-title {

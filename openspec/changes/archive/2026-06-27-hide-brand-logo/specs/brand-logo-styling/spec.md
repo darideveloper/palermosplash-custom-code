@@ -1,7 +1,23 @@
-## Purpose
+## REMOVED Requirements
 
-Define how the Palermo Splash brand logo is presented on the cake-visual landing page. The logo is currently hidden on that page; the rules below describe the hidden state and preserve the previous visible-styling block as an in-file fallback for future reintroduction.
-## Requirements
+### Requirement: Brand logo placement
+**Reason**: The logo is no longer displayed on the cake-visual page, so its placement, size, blend mode, and stacking behaviour are all moot. The `display: none` rule removes the element from rendering entirely.
+**Migration**: If the logo is reintroduced in the future, a new OpenSpec change must re-establish placement, size, blend mode, and stacking rules for the live styling. The previous values are preserved as a commented reference in `palermo-cake/palermo-cake.css` for convenience but must not be treated as the current requirement.
+
+### Requirement: Brand logo size
+**Reason**: Same as above — the logo is hidden, so its rendered dimensions are irrelevant.
+**Migration**: See `Brand logo placement` migration note.
+
+### Requirement: Brand logo visual integration
+**Reason**: The blend mode is no longer in effect because the element is hidden.
+**Migration**: See `Brand logo placement` migration note.
+
+### Requirement: Brand logo does not block interaction
+**Reason**: Hiding the element via `display: none` removes it from the layout and pointer-event flow, so an explicit non-blocking stacking rule is unnecessary.
+**Migration**: If the logo is ever shown again, the new change must re-establish the non-blocking requirement (e.g., `z-index: -1` plus the section comment marker).
+
+## MODIFIED Requirements
+
 ### Requirement: CSS section comment for brand logo
 The system MUST include a `/* brand logo */` section comment immediately before the `#logo` hide rule in `palermo-cake/palermo-cake.css` to keep the file's sections explicit. The same section must also contain the previous visible-styling block as a commented-out reference for easy reversion.
 
@@ -9,6 +25,8 @@ The system MUST include a `/* brand logo */` section comment immediately before 
 - **WHEN** a developer opens `palermo-cake/palermo-cake.css`
 - **THEN** the brand logo block is preceded by a `/* brand logo */` comment that marks the section boundary
 - **AND** the previous live `#logo img` styling (width 250px / height auto / position fixed top-right / z-index -1 / mix-blend-mode overlay / min-width 25vw) is preserved inside the same section as a `/* ... */` comment block
+
+## ADDED Requirements
 
 ### Requirement: Brand logo is hidden on the cake-visual page
 The system MUST hide the `#logo` element on the cake-visual page by applying `display: none` to the Elementor-rendered wrapper in `palermo-cake/palermo-cake.css`. Hiding the wrapper (rather than only the inner `<img>`) MUST be used so the rule is robust to any tag Elementor renders inside the wrapper.
@@ -31,4 +49,3 @@ The system MUST place the hide rule in `palermo-cake/palermo-cake.css` (the feat
 #### Scenario: Other pages are not affected
 - **WHEN** any page other than the cake-visual landing page is rendered
 - **THEN** the `#logo` element is styled by the site's normal rules and is not hidden by the cake-feature CSS
-
