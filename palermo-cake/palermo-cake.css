@@ -107,6 +107,7 @@ body {
 	transform: translate(var(--btn-translate-x), var(--btn-translate-y)) scale(1.05);
 }
 
+/* .palermo-btn-icon — currently unused on cake map buttons (see palermo-cake.js); kept for potential future restore */
 .palermo-btn-icon {
 	line-height: 1;
 	transition: transform 200ms ease;
@@ -118,12 +119,12 @@ body {
 	line-height: 1.15;
 	font-weight: 700;
 	color: #2b1d0e;
+	text-align: center;
 	transition: transform 200ms ease;
 	transform-origin: center;
 }
 
-.cake-button:hover .palermo-btn-icon,
-.cake-button:hover .palermo-btn-label {
+.cake-button:hover .palermo-btn-label /*, .cake-button:hover .palermo-btn-icon (unused) */ {
 	transform: scale(1.05);
 }
 

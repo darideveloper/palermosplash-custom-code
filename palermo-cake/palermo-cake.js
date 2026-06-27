@@ -83,11 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const glowElement = document.getElementById(`glow-${i}`);
 
         if (data) {
-            const iconEl = document.createElement('span');
-            iconEl.className = 'palermo-btn-icon';
-            iconEl.textContent = data.icon;
-            button.appendChild(iconEl);
-
             const labelEl = document.createElement('span');
             labelEl.className = 'palermo-btn-label';
             labelEl.textContent = data.shortName;
